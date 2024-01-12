@@ -1,0 +1,21 @@
+# 这个工作流程会在master分支上的每次提交后运行npm test命令
+name: Run npm test on master branch
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: npm install
+      - name: Run npm test
+        run: npm test
