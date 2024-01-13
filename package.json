@@ -1,6 +1,6 @@
 {
-  "name": "optimizerPlugin",
-  "version": "1.0.0",
+  "name": "optimizer-plugin",
+  "version": "1.0.1",
   "description": "optimizerPlugin is a Babel plugin that optimizes code through static analysis. It is primarily written and documented by ChatGPT, while the user is responsible for writing test cases and verifying if the code effects meet expectations.",
   "main": "index.js",
   "bin": "ci/index.js",
