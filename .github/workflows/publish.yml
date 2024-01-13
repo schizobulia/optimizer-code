@@ -1,15 +1,13 @@
 name: Publish to npm
 
 on:
-  workflow_run:
-    workflows: ["Run test"]
-    types:
-      - completed
+  push:
+    tags:
+      - '*'
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
     - uses: actions/checkout@v2
@@ -19,6 +17,19 @@ jobs:
       with:
         node-version: '14'
         registry-url: 'https://registry.npmjs.org'
+
+    - name: Get version from tag
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+    
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run npm test
+      run: npm test
+
+    - name: Update version in package.json
+      run: npm version --allow-same-version --no-git-tag-version ${{ steps.get_version.outputs.VERSION }}
 
     - name: Publish
       run: npm publish
