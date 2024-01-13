@@ -53,6 +53,32 @@ if (isIos(1, 789) || true && false) {
 } else {
   console.log("This is not ios");
 }
+
+//source
+switch (xxx()) {
+  case isIos():
+    f();
+    break;
+  case false:
+    g();
+    break;
+  default:
+    h();
+};
+
+//target
+switch (xxx()) {
+  case false:
+    g();
+    break;
+  default:
+    h();
+};
+
+//source
+const data = isIos() ? 1 : 2;
+//target
+const data = 2;
 ```
 
 In this way, only this if statement in your source code will be deleted or replaced, and other places where the isIos function is called will not be affected.
