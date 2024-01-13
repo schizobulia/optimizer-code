@@ -195,6 +195,43 @@ function test_7() {
   assert.strictEqual(getMd5(resultIos.code), 'cf0e2b9ccc07d087722124c6f0ba4199c22d7a0cef8da4281aa305c006f9e57a')
 }
 
+function test_8() {
+  const code = `const data = isIos() ? a() : b();`;
+  const resultIos = transform(code, {
+    plugins: [optimizerPlugin({
+      removeCall: 'isIos'
+    })]
+  });
+  assert.strictEqual(getMd5(resultIos.code), 'c09174cc6c76bf7de50bf1c797a401a4dadf9a12d8b572329383a03f5ee82e7a')
+
+  const result1 = transform(`const data = isIos() ? 1 : 2;`, {
+    plugins: [optimizerPlugin({
+      removeCall: 'isIos'
+    })]
+  });
+
+  assert.strictEqual(getMd5(result1.code), '1845beac1750827c9d0e84389201b4794130517af22f8381b15fb40bf7027f58')
+
+
+
+  const result2 = transform(`
+    switch (xxx()) {
+      case isIos():
+        f();
+        break;
+      case false:
+        g();
+        break;
+      default:
+        h();
+    };`, { plugins: [optimizerPlugin({
+      removeCall: 'isIos'
+    })]
+  });
+  assert.strictEqual(getMd5(result2.code), 'bfe9059fef2dd9b654b2239aeb418682d398340632e0497e08520550d4fa45c5')
+}
+
+
 test_1()
 
 test_2()
@@ -208,3 +245,5 @@ test_5()
 test_6()
 
 test_7()
+
+test_8()
