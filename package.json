@@ -1,16 +1,34 @@
 {
-  "name": "optimizer-code",
+  "name": "optimizerPlugin",
   "version": "1.0.0",
-  "description": "",
+  "description": "optimizerPlugin is a Babel plugin that optimizes code through static analysis. It is primarily written and documented by ChatGPT, while the user is responsible for writing test cases and verifying if the code effects meet expectations.",
   "main": "index.js",
+  "bin": "ci/index.js",
   "scripts": {
     "test": "node test/index.js"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schizobulia/optimizer-code.git"
+  },
+  "keywords": [
+    "Babel",
+    "plugin",
+    "static analysis",
+    "code optimization",
+    "ChatGPT",
+    "test cases",
+    "code effect verification"
+  ],
+  "bugs": {
+    "url": "https://github.com/schizobulia/optimizer-code/issues"
+  },
+  "homepage": "https://github.com/schizobulia/optimizer-code#readme",
+  "author": "schizobulia",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.23.7",
-    "@babel/types": "^7.23.6"
+    "@babel/types": "^7.23.6",
+    "fs-extra": "^11.2.0"
   }
 }

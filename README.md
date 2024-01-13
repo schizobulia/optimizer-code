@@ -1,16 +1,16 @@
 ## optimizerPlugin
-optimizerPlugin是一个Babel插件，用于通过静态分析的方法优化代码。主要是ChatGPT写代码和文档，我负责编写测试用例和校验代码效果是否符合预期。目前会持续更新...
+optimizerPlugin is a Babel plugin used to optimize code through static analysis methods. Mainly, ChatGPT writes code and documentation, and I am responsible for writing test cases and verifying whether the code effect meets expectations. Updates will continue...
 
-## 安装
-你可以使用npm或yarn来安装这个插件：
+## Installation
+You can use npm or yarn to install this plugin:
 ```bash
 npm install --save-dev optimizer-plugin
 # or
 yarn add --dev optimizer-plugin
 ```
 
-## 使用
-你可以在你的.babelrc文件中配置这个插件，指定你想要删除的函数名，例如：
+## Usage
+You can configure this plugin in your .babelrc file, specifying the function name you want to delete, for example:
 ```json
 {
   "plugins": [
@@ -19,9 +19,9 @@ yarn add --dev optimizer-plugin
 }
 ```
 
-这样，你的源代码中所有调用isAndroid函数的地方，以及相关的if语句，都会被删除或替换。
+In this way, all places in your source code that call the isAndroid function, as well as related if statements, will be deleted or replaced.
 
-你也可以在你的代码中使用注释来指定你想要删除的函数名，例如：
+You can also use comments in your code to specify the function name you want to delete, for example:
 ```javascript
 // @removeCall isIos
 if (isIos()) {
@@ -29,12 +29,10 @@ if (isIos()) {
 } else {
   console.log("This is not ios");
 }
-//会被修改为
+// will be modified to
 {
   console.log("This is not ios");
 }
-```
-```javascript
 // @removeCall isIos
 if (isAndroid()) {
   console.log("This is android");
@@ -43,13 +41,13 @@ if (isAndroid()) {
 } else {
   console.log("This is not test");
 }
-//会被修改为
+// will be modified to
 if (a1()) {
   console.log("This is a1");
 } else {
   console.log("This is not test");
 }
-//如果是包含 || 的就不会被处理
+// if it contains || it will not be processed
 if (isIos(1, 789) || true && false) {
   console.log("This is ios");
 } else {
@@ -57,11 +55,24 @@ if (isIos(1, 789) || true && false) {
 }
 ```
 
-这样，你的源代码中只有这个if语句会被删除或替换，其他地方的isIos函数调用不会受到影响。
+In this way, only this if statement in your source code will be deleted or replaced, and other places where the isIos function is called will not be affected.
 
-## 功能
-这个插件可以处理以下几种情况：
+## Function
+This plugin can handle the following situations:
 
-如果if语句的条件表达式是一个函数调用，且函数名与removeCall参数相同，那么就用if语句的then分支或else分支替换当前节点，取决于函数名是否与removeCall参数相同
+If the conditional expression of the if statement is a function call, and the function name is the same as the removeCall parameter, then replace the current node with the then branch or else branch of the if statement, depending on whether the function name is the same as the removeCall parameter
 
-持续更新中...
+Continuously updating...
+
+## The following are common static optimization methods given by ChatGPT (to be implemented):
+- Data flow analysis: This method can be used to detect possible errors in the program, such as uninitialized variables, unused variables, invalid operations.
+
+- Control flow analysis: This method can be used to determine the possible execution paths in the program, thereby finding possible problems, such as dead loops, unreachable code.
+
+- Abstract interpretation: This method can be used to predict the behavior of the program at runtime, such as possible values of variables, possible exceptions.
+
+- Symbolic execution: This method can be used to generate inputs that trigger specific behaviors in the program, such as inputs that trigger program crashes.
+
+- Value dependency analysis: This method can be used to determine the data dependency relationships in the program, thereby optimizing.
+
+- AST-based code optimization: By analyzing the abstract syntax tree (AST), we can perform various code optimizations, such as constant folding, useless code deletion, loop optimization.

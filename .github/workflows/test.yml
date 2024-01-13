@@ -1,5 +1,5 @@
-# 这个工作流程会在master分支上的每次提交后运行npm test命令
-name: Run npm test on master branch
+# 这个工作流程会在main分支上的每次提交后运行npm test命令
+name: Run test
 
 on:
   push:
